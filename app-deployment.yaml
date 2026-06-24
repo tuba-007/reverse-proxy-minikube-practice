@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-server
+  template:
+    metadata:
+      labels:
+        app: app-server
+    spec:
+      containers:
+        - name: app-server
+          image: tuba007/node-test-app
+          env:
+            - name: DATABASE_URL
+              value: "postgres://tuba:tuba@postgres:5432/main_db"
